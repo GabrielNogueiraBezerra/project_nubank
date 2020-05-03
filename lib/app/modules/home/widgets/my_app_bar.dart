@@ -30,8 +30,8 @@ class _MyAppBarState extends State<MyAppBar> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Image.network(
-                        'https://logodownload.org/wp-content/uploads/2019/08/nubank-logo-3.png',
+                      Image.asset(
+                        'assets/logo.png',
                         height: 35,
                         color: Colors.white,
                       ),
