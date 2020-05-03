@@ -62,6 +62,18 @@ mixin _$HomeController on _HomeControllerBase, Store {
   @override
   bool get showMenu =>
       (_$showMenuComputed ??= Computed<bool>(() => super.showMenu)).value;
+  Computed<bool> _$showValorContaComputed;
+
+  @override
+  bool get showValorConta =>
+      (_$showValorContaComputed ??= Computed<bool>(() => super.showValorConta))
+          .value;
+  Computed<bool> _$buttonRewardsPressedComputed;
+
+  @override
+  bool get buttonRewardsPressed => (_$buttonRewardsPressedComputed ??=
+          Computed<bool>(() => super.buttonRewardsPressed))
+      .value;
   Computed<int> _$currentIndexComputed;
 
   @override
@@ -261,6 +273,44 @@ mixin _$HomeController on _HomeControllerBase, Store {
     }, _$_showMenuAtom, name: '${_$_showMenuAtom.name}_set');
   }
 
+  final _$_showValorContaAtom =
+      Atom(name: '_HomeControllerBase._showValorConta');
+
+  @override
+  bool get _showValorConta {
+    _$_showValorContaAtom.context.enforceReadPolicy(_$_showValorContaAtom);
+    _$_showValorContaAtom.reportObserved();
+    return super._showValorConta;
+  }
+
+  @override
+  set _showValorConta(bool value) {
+    _$_showValorContaAtom.context.conditionallyRunInAction(() {
+      super._showValorConta = value;
+      _$_showValorContaAtom.reportChanged();
+    }, _$_showValorContaAtom, name: '${_$_showValorContaAtom.name}_set');
+  }
+
+  final _$_buttonRewardsPressedAtom =
+      Atom(name: '_HomeControllerBase._buttonRewardsPressed');
+
+  @override
+  bool get _buttonRewardsPressed {
+    _$_buttonRewardsPressedAtom.context
+        .enforceReadPolicy(_$_buttonRewardsPressedAtom);
+    _$_buttonRewardsPressedAtom.reportObserved();
+    return super._buttonRewardsPressed;
+  }
+
+  @override
+  set _buttonRewardsPressed(bool value) {
+    _$_buttonRewardsPressedAtom.context.conditionallyRunInAction(() {
+      super._buttonRewardsPressed = value;
+      _$_buttonRewardsPressedAtom.reportChanged();
+    }, _$_buttonRewardsPressedAtom,
+        name: '${_$_buttonRewardsPressedAtom.name}_set');
+  }
+
   final _$_currentIndexAtom = Atom(name: '_HomeControllerBase._currentIndex');
 
   @override
@@ -395,6 +445,22 @@ mixin _$HomeController on _HomeControllerBase, Store {
         .run(() => super.onPanUpdatePageView(details));
   }
 
+  final _$onTapContaAsyncAction = AsyncAction('onTapConta');
+
+  @override
+  Future<dynamic> onTapConta() {
+    return _$onTapContaAsyncAction.run(() => super.onTapConta());
+  }
+
+  final _$onHighlihtChangedRewardsAsyncAction =
+      AsyncAction('onHighlihtChangedRewards');
+
+  @override
+  Future<dynamic> onHighlihtChangedRewards(dynamic details) {
+    return _$onHighlihtChangedRewardsAsyncAction
+        .run(() => super.onHighlihtChangedRewards(details));
+  }
+
   final _$onTapMenuAsyncAction = AsyncAction('onTapMenu');
 
   @override
@@ -504,9 +570,19 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   @override
+  Row getLastAccountClient() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction();
+    try {
+      return super.getLastAccountClient();
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
-        'screenHeight: ${screenHeight.toString()},screenWidth: ${screenWidth.toString()},heightListMenus: ${heightListMenus.toString()},heightMenuApp: ${heightMenuApp.toString()},sizeStatusBar: ${sizeStatusBar.toString()},sizeMenuOptions: ${sizeMenuOptions.toString()},sizeBottomBar: ${sizeBottomBar.toString()},sizeBottomFirstCard: ${sizeBottomFirstCard.toString()},showMenu: ${showMenu.toString()},currentIndex: ${currentIndex.toString()},cliente: ${cliente.toString()},yPosition: ${yPosition.toString()},topPageViewCard: ${topPageViewCard.toString()},bottomPageViewCard: ${bottomPageViewCard.toString()},heightPageViewCard: ${heightPageViewCard.toString()},topCarrousel: ${topCarrousel.toString()}';
+        'screenHeight: ${screenHeight.toString()},screenWidth: ${screenWidth.toString()},heightListMenus: ${heightListMenus.toString()},heightMenuApp: ${heightMenuApp.toString()},sizeStatusBar: ${sizeStatusBar.toString()},sizeMenuOptions: ${sizeMenuOptions.toString()},sizeBottomBar: ${sizeBottomBar.toString()},sizeBottomFirstCard: ${sizeBottomFirstCard.toString()},showMenu: ${showMenu.toString()},showValorConta: ${showValorConta.toString()},buttonRewardsPressed: ${buttonRewardsPressed.toString()},currentIndex: ${currentIndex.toString()},cliente: ${cliente.toString()},yPosition: ${yPosition.toString()},topPageViewCard: ${topPageViewCard.toString()},bottomPageViewCard: ${bottomPageViewCard.toString()},heightPageViewCard: ${heightPageViewCard.toString()},topCarrousel: ${topCarrousel.toString()}';
     return '{$string}';
   }
 }

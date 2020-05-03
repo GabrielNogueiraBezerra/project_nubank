@@ -4,6 +4,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:project/app/modules/home/home_controller.dart';
 import 'package:project/app/modules/home/widgets/card_page_view.dart';
 import 'package:project/app/modules/home/widgets/first_card.dart';
+import 'package:project/app/modules/home/widgets/second_card.dart';
+import 'package:project/app/modules/home/widgets/third_card.dart';
 
 class MyPageView extends StatefulWidget {
   @override
@@ -37,10 +39,10 @@ class _MyPageViewState extends State<MyPageView> {
                 child: FirstCard(),
               ),
               CardPageView(
-                child: FirstCard(),
+                child: SecondCard(),
               ),
               CardPageView(
-                child: FirstCard(),
+                child: ThirdCard(),
               ),
             ],
           ),

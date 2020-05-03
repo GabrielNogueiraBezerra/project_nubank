@@ -1,5 +1,6 @@
 import 'package:project/app/modules/home/models/client.dart';
 import 'package:project/app/modules/home/models/compra.dart';
+import 'package:project/app/modules/home/models/deposito.dart';
 
 class RepositoryCliente {
   /// @loadCliente return Cliente
@@ -23,6 +24,23 @@ class RepositoryCliente {
     compras.add(c1);
     compras.add(c2);
 
+    List<Deposito> depositos = [];
+
+    Deposito d1 = new Deposito(
+      datahora: DateTime.parse("2020-05-03 09:35:18Z"),
+      operacao: 'Entrada',
+      valor: 924.20,
+    );
+
+    Deposito d2 = new Deposito(
+      datahora: DateTime.parse("2020-05-03 10:55:23Z"),
+      operacao: 'Saida',
+      valor: 147.20,
+    );
+
+    depositos.add(d1);
+    depositos.add(d2);
+
     Cliente c = new Cliente(
       nome: 'Gabriel',
       qrCode:
@@ -33,6 +51,7 @@ class RepositoryCliente {
       faturaAtual: 1102.48,
       proximasFaturas: 525.21,
       compras: compras,
+      depositos: depositos,
     );
     return c;
   }

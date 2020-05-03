@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
+import 'package:project/app/modules/home/models/deposito.dart';
 import 'package:project/app/modules/home/repository/repository_client.dart';
 import 'package:project/app/modules/home/models/client.dart';
 import 'package:project/app/modules/home/models/compra.dart';
@@ -132,6 +133,26 @@ abstract class _HomeControllerBase with Store {
   @computed
   bool get showMenu => this._showMenu;
 
+  /// @_showValorConta
+  /// Variável de controle da visibilidade da conta
+  @observable
+  bool _showValorConta;
+
+  /// @showValorConta
+  /// Retorna o valor de @_showValorConta
+  @computed
+  bool get showValorConta => this._showValorConta;
+
+  /// @_buttonRewardsPressed
+  /// Variável de controle da cor do texto do botão rewards
+  @observable
+  bool _buttonRewardsPressed;
+
+  /// @buttonRewardsPressed
+  /// Retorna o valor de @_buttonRewardsPressed
+  @computed
+  bool get buttonRewardsPressed => this._buttonRewardsPressed;
+
   /// @_currentIndex
   /// Variável de controle dos indexes do pageview
   @observable
@@ -241,6 +262,20 @@ abstract class _HomeControllerBase with Store {
     }
   }
 
+  /// @onTapConta
+  /// Função de clique do mostrar valor da conta
+  @action
+  Future onTapConta() async {
+    this._showValorConta = !this._showValorConta;
+  }
+
+  /// @onHighlihtChangedRewards
+  /// Função de clique do mostrar valor da conta
+  @action
+  Future onHighlihtChangedRewards(details) async {
+    this._buttonRewardsPressed = details;
+  }
+
   /// @onTapMenu
   /// Função de clique do menu
   @action
@@ -331,6 +366,8 @@ abstract class _HomeControllerBase with Store {
     return numberReturn;
   }
 
+  /// @getLastPurchaseClient
+  /// Pego a ultima compra do cliente
   @action
   Row getLastPurchaseClient() {
     Compra compra = this._cliente.compras.last;
@@ -389,10 +426,76 @@ abstract class _HomeControllerBase with Store {
     );
   }
 
+  /// @getLastAccountClient
+  /// Pego o ultimo deposito do cliente
+  @action
+  Row getLastAccountClient() {
+    Deposito deposito = this._cliente.depositos.last;
+
+    Icon icon;
+    switch (deposito.operacao) {
+      case 'Entrada':
+        icon = Icon(
+          Icons.add_shopping_cart,
+          color: Colors.grey,
+        );
+        break;
+      case 'Saida':
+        icon = Icon(
+          Icons.remove_circle,
+          color: Colors.grey,
+        );
+        break;
+
+      default:
+        icon = Icon(
+          Icons.block,
+          color: Colors.grey,
+        );
+        break;
+    }
+
+    String texto = deposito.operacao == "Entrada"
+        ? 'Dinheiro guardado '
+        : 'Pagamento efetuado ';
+    texto += 'no valor de R\$' +
+        this.formatNumber(deposito.valor) +
+        ' em ' +
+        deposito.datahora.toString() +
+        '...';
+
+    texto = texto.substring(0, 70);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        icon,
+        SizedBox(
+          width: 20,
+        ),
+        Flexible(
+          child: Text(
+            texto,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 13,
+            ),
+          ),
+        ),
+        Icon(
+          Icons.arrow_forward_ios,
+          color: Colors.grey,
+          size: 18,
+        ),
+      ],
+    );
+  }
+
   /// @_HomeControllerBase
   /// Método Construtor
   _HomeControllerBase(this._repositorio) {
     this._showMenu = false;
+    this._showValorConta = false;
+    this._buttonRewardsPressed = false;
     this._currentIndex = 0;
     this._topPageViewCard = 0.20;
     this._heightPageViewCard = 0.45;
